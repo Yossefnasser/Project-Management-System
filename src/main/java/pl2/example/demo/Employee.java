@@ -25,9 +25,8 @@ public class Employee extends User{
     public List<String> viewPenalties(){
         return penalties;
     }
-    public boolean checkTaskCompletion(Task task) {
+    public void checkTaskCompletion(Task task) {}
 
-    }
     public List<String> viewAssignedTasks(){
         return assignedTasks;
     }

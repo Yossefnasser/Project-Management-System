@@ -1,0 +1,87 @@
+/* Style for the AnchorPane background */
+.root {
+    -fx-background-color: #f4f4f9;
+    -fx-padding: 20;
+}
+
+/* Style for the Button */
+.button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-min-width: 120px;
+    -fx-pref-width: 121px;
+    -fx-pref-height: 30px;
+    -fx-margin: 5px;
+}
+
+/* Button hover effect */
+.button:hover {
+    -fx-background-color: #45a049;
+}
+
+/* Style for the TextField */
+.text-field {
+    -fx-background-color: white;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5px;
+    -fx-font-size: 14px;
+    -fx-prompt-text-fill: #aaa;
+    -fx-pref-width: 200px;
+}
+
+/* Style for the PasswordField */
+.password-field {
+    -fx-background-color: white;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5px;
+    -fx-font-size: 14px;
+    -fx-prompt-text-fill: #aaa;
+    -fx-pref-width: 200px;
+}
+
+/* Style for the Label */
+.label {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+    -fx-padding: 5px;
+}
+#errorMessage {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-fill: red;
+}
+
+/* Style for the GridPane */
+.grid-pane {
+    -fx-hgap: 10px;
+    -fx-vgap: 10px;
+    -fx-padding: 20px;
+}
+
+/* Center the labels in the grid */
+.grid-pane.label {
+    -fx-alignment: CENTER_LEFT;
+}
+
+/* Style for the Clear button */
+#clearButton {
+    -fx-background-color: #f44336;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-min-width: 120px;
+    -fx-pref-width: 121px;
+    -fx-pref-height: 30px;
+}
+
+/* Clear button hover effect */
+#clearButton:hover {
+    -fx-background-color: #e53935;
+}
