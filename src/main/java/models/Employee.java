@@ -1,13 +1,14 @@
-package pl2.example.demo;
+package models;
 
 import javafx.concurrent.Task;
+import pl2.example.demo.User;
 
 import javax.swing.*;
 import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
-public class Employee extends User{
+public class Employee extends User {
     private LocalTime enterTime ;
     private LocalTime exitTime ;
     private List<String> penalties ;
@@ -15,8 +16,9 @@ public class Employee extends User{
     public Employee(String name, int age, String Email, int id, int phoneNumber) {
         super(name, age, Email, id, phoneNumber);
     }
-    public float calculateWorkingHours(){
+    public float  calculateWorkingHours(){
         float workingHours = enterTime.getHour() - exitTime.getHour();
+        System.out.println(workingHours);
         return workingHours;
     }
     public void requestVacation(){
