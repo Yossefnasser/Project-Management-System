@@ -13,7 +13,7 @@ public abstract class User {
     private String password;
 
     private final Map<String, String> userRoles = new HashMap<>();
-    private final Map<String, String> userPasswords = new HashMap<>();
+    private static final Map<String, String> userPasswords = new HashMap<>();
     public User(String name, int age, String Email, int id, int phoneNumber) {
         this.name = name;
         this.age = age;
@@ -21,7 +21,7 @@ public abstract class User {
         this.id = id;
         this.phoneNumber = phoneNumber;
     }
-    public boolean login(String username, String password) {
+    public static boolean login(String username, String password) {
 
         userPasswords.put("employee1", "password123");
         userPasswords.put("teamleader1", "password456");
