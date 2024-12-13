@@ -1,5 +1,26 @@
 package Controllers;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
+import models.Employee;
+
+import java.time.Duration;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class EmployeeController {
 
     @FXML
@@ -61,7 +82,7 @@ public class EmployeeController {
 
     private Employee employee;
     public void initialize() {
-        employee = new Employee("name" , )
+        employee = new Employee("name" , 15 ,"51","01111",0);
         employeeRequestsTable.setItems(requests);
         List<Employee> employees = Employee.loadEmployeeData();
 

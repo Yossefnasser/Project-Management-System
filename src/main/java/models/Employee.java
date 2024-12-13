@@ -1,25 +1,53 @@
 package models;
 
 import javafx.concurrent.Task;
-import pl2.example.demo.User;
 
-import javax.swing.*;
-import java.time.LocalTime;
-import java.util.Date;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
+
 public class Employee extends User {
-    private LocalTime enterTime ;
-    private LocalTime exitTime ;
+    private double hoursWorked;
     private List<String> penalties ;
-    private List<String> assignedTasks;
-    public Employee(String name, int age, String Email, int id, int phoneNumber) {
-        super(name, age, Email, id, phoneNumber);
+    private List<Task> assignedTasks;
+    private static final String EMPLOYEE_FILE = "employees.txt";
+
+    public Employee(String name, int age, String id, String phoneNumber , double hoursWorked) {
+        super(name, age, id, phoneNumber);
+        this.hoursWorked = hoursWorked ;
     }
-    public float  calculateWorkingHours(){
-        float workingHours = enterTime.getHour() - exitTime.getHour();
-        System.out.println(workingHours);
-        return workingHours;
+    public void saveEmployeeData() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(EMPLOYEE_FILE, true))) {
+            writer.write(getId() + "," + getName() + "," + getPhoneNumber() + "," + getAge() + "," + this.hoursWorked);
+            writer.newLine();
+        } catch (IOException e) {
+            System.err.println("Error saving employee data: " + e.getMessage());
+        }
+    }
+
+    // Load Data from File
+    public static List<Employee> loadEmployeeData() {
+        List<Employee> employees = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(EMPLOYEE_FILE))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length == 5) {
+                    Employee employee = new Employee(
+                            parts[1],
+                            Integer.parseInt(parts[0]),
+                            parts[2],
+                            parts[3],
+                            Double.parseDouble(parts[4])
+                    );
+                    employees.add(employee);
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error loading employee data: " + e.getMessage());
+        }
+        return employees;
     }
     public void requestVacation(){
 
@@ -29,31 +57,20 @@ public class Employee extends User {
     }
     public void checkTaskCompletion(Task task) {}
 
-    public List<String> viewAssignedTasks(){
+    public List<Task> viewAssignedTasks(){
         return assignedTasks;
     }
 
-    public LocalTime getEnterTime() {
-        return enterTime;
-    }
-
-    public LocalTime getExitTime() {
-        return exitTime;
+    public void setHoursWorked(long hoursWorked) {
+        this.hoursWorked = hoursWorked;
     }
 
     public List<String> getPenalties() {
         return penalties;
     }
 
-    public List<String> getAssignedTasks() {
+    public List<Task> getAssignedTasks() {
         return assignedTasks;
     }
-
-    public void setEnterTime(LocalTime enterTime) {
-        this.enterTime = enterTime;
-    }
-
-    public void setExitTime(LocalTime exitTime) {
-        this.exitTime = exitTime;
-    }
 }
+

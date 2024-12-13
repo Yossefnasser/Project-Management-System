@@ -1,12 +1,203 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.cell.MapValueFactory?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../employeeStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.EmployeeController">
+   <children>
+      <Label layoutX="301.0" layoutY="22.0" prefHeight="38.0" prefWidth="199.0" text="Employee model">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <TabPane layoutY="83.0" prefHeight="463.0" prefWidth="762.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="20.0">
+         <tabs>
+            <Tab text="Working Hours">
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+                     <children>
+                        <Label alignment="TOP_CENTER" prefHeight="47.0" prefWidth="762.0" text="calculate working hours">
+                           <font>
+                              <Font size="21.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="8.0" />
+                           </VBox.margin>
+                        </Label>
+                        <HBox prefHeight="95.0" prefWidth="762.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="109.0" prefWidth="376.0" text="Entry Time :">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="entryTimeField" prefHeight="34.0" prefWidth="213.0" promptText="Enter Entry Time (HH:mm)">
+                                 <HBox.margin>
+                                    <Insets top="30.0" />
+                                 </HBox.margin></TextField>
+                           </children>
+                        </HBox>
+                        <HBox layoutX="10.0" layoutY="71.0" prefHeight="93.0" prefWidth="762.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="109.0" prefWidth="376.0" text="Exit Time : ">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="exitTimeField" prefHeight="34.0" prefWidth="213.0" promptText="Enter Exit Time (HH:mm)">
+                                 <HBox.margin>
+                                    <Insets top="30.0" />
+                                 </HBox.margin></TextField>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="calculateButton" mnemonicParsing="false" onAction="#calculateButtonAction" prefHeight="46.0" prefWidth="159.0" text="Calculate">
+                                 <font>
+                                    <Font size="17.0" />
+                                 </font>
+                              </Button>
+                              <Text fx:id="calculatedTime" strokeType="OUTSIDE" strokeWidth="0.0" text="You have worked for hours this month " wrappingWidth="237.13671875">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="200.0" top="20.0" />
+                                 </HBox.margin>
+                              </Text>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
+            <Tab text="Vacation Request">
+               <content>
+                  <VBox alignment="CENTER" spacing="10">
+                     <Label prefHeight="31.0" prefWidth="175.0" text="Request Vacation">
+                        <font>
+                           <Font size="21.0" />
+                        </font>
+                        <VBox.margin>
+                           <Insets top="10.0" />
+                        </VBox.margin></Label>
+                     <TextField fx:id="startDateField" promptText="Start Date (YYYY-MM-DD)" />
+                     <TextField fx:id="endDateField" promptText="End Date (YYYY-MM-DD)" />
+                     <Button fx:id="requestVacationButton" onAction="#handleVacationRequest" text="Request Vacation" />
 
+                     <TableView fx:id="employeeRequestsTable" prefWidth="400">
+                        <columns>
+                           <TableColumn prefWidth="226.0" text="Start Date">
+                              <cellValueFactory>
+                                 <MapValueFactory key="startDate" />
+                              </cellValueFactory>
+                           </TableColumn>
+                           <TableColumn prefWidth="272.0" text="End Date">
+                              <cellValueFactory>
+                                 <MapValueFactory key="endDate" />
+                              </cellValueFactory>
+                           </TableColumn>
+                           <TableColumn prefWidth="220.0" text="Status">
+                              <cellValueFactory>
+                                 <MapValueFactory key="status" />
+                              </cellValueFactory>
+                           </TableColumn>
+                        </columns>
+                     </TableView>
+
+                  </VBox>
+
+               </content>
+            </Tab>
+            <Tab text="Penalties">
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+                     <children>
+                        <Label alignment="TOP_CENTER" prefHeight="22.0" prefWidth="763.0" text="View Penalties">
+                           <font>
+                              <Font size="21.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="8.0" />
+                           </VBox.margin>
+                        </Label>
+                        <TableView fx:id="penalties" prefHeight="203.0" prefWidth="762.0">
+                           <columns>
+                              <TableColumn fx:id="penaltyDateColumn" prefWidth="365.0" text="Date" />
+                              <TableColumn fx:id="penaltyReasonColumn" prefWidth="396.0" text="Reason" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
+            <Tab text="Assigned Tasks">
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+                     <children>
+                        <Label alignment="TOP_CENTER" prefHeight="35.0" prefWidth="762.0" text="Assigned Tasks">
+                           <font>
+                              <Font size="21.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="8.0" />
+                           </VBox.margin>
+                        </Label>
+                        <TableView fx:id="assignedTasks" prefHeight="200.0" prefWidth="200.0">
+                           <columns>
+                              <TableColumn fx:id="nameField" prefWidth="237.0" text="Task Name" />
+                              <TableColumn fx:id="statusField" prefWidth="243.0" text="Status" />
+                              <TableColumn fx:id="deadlineField" prefWidth="237.0" text="Deadline" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
+            <Tab text="Task Completion">
+               <content>
+                  <VBox prefHeight="406.0" prefWidth="762.0" spacing="20.0">
+                     <children>
+                        <Label alignment="TOP_CENTER" prefHeight="17.0" prefWidth="768.0" text="Mark Task as Complete">
+                           <font>
+                              <Font size="21.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="8.0" />
+                           </VBox.margin>
+                        </Label>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="markComplete" mnemonicParsing="false" onAction="#MarkComplete" prefHeight="47.0" prefWidth="113.0" text="Mark as Complete">
+                                 <HBox.margin>
+                                    <Insets left="150.0" top="20.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <ComboBox fx:id="tasksBox" prefWidth="150.0" promptText="Tasks">
+                                 <HBox.margin>
+                                    <Insets left="170.0" top="20.0" />
+                                 </HBox.margin>
+                              </ComboBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+   </children>
 </AnchorPane>

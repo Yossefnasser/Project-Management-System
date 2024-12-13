@@ -9,27 +9,20 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import models.Employee;
-import pl2.example.demo.User;
+import models.User;
 
 import java.io.IOException;
 
 public class LoginController {
 
     @FXML
-    private Button clearButton;
-
-    @FXML
     private Text errorMessage;
-
-    @FXML
-    private Button loginButton;
-
-    @FXML
-    private Label newlabel;
 
     @FXML
     private PasswordField passwordfield;
@@ -39,35 +32,47 @@ public class LoginController {
 
 
     @FXML
-    void loginHandler(MouseEvent event) {
+    private Button loginButton;
 
+    private void processLogin() {
         String username = usernamefield.getText();
         String password = passwordfield.getText();
+        if (username.equals( '1')&&password.equals( '1') ) {
+            Employee newEmployee = new Employee("Jane Doe", 20, "222", "04010", 0);
+            newEmployee.saveEmployeeData();
+        }
 
         System.out.println("Username: " + username);
         System.out.println("Password: " + password);
+
         if (username.isEmpty() || password.isEmpty()) {
             errorMessage.setText("Username or password is empty");
-        }
-        else if (!User.login(username , password)) {
+        } else if (!User.login(username, password)) {
             errorMessage.setText("Username or password is incorrect");
-        }
-        else {
+        } else {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/EmployeePage.fxml")); // Update the path to your new FXML file
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/EmployeePage.fxml"));
                 Parent root = loader.load();
 
-                // Get the current stage
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-                // Set the new scene
+                Stage stage = (Stage) usernamefield.getScene().getWindow(); // Get stage from any node in the scene
                 stage.setScene(new Scene(root));
                 stage.show();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
+    }
 
+    @FXML
+    void loginHandler(MouseEvent event) {
+        processLogin();
+    }
+
+    @FXML
+    void OnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            processLogin();
+        }
     }
 
     public void clearHandler(MouseEvent event){
