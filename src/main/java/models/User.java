@@ -8,27 +8,15 @@ public abstract class User {
     private int age;
     private String Email;
     private String id;
-    private String phoneNumber;
-    private String Username;
     private String password;
+    private String Username;
 
     private static final Map<String, String> userPasswords = new HashMap<>();
-    public User(String name, int age, String id, String phoneNumber) {
+    public User(String name, int age, String id, String password) {
         this.name = name;
         this.age = age;
         this.id = id;
-        this.phoneNumber = phoneNumber;
-    }
-    public static boolean login(String username, String password) {
-
-        userPasswords.put("1", "1");
-        userPasswords.put("teamleader1", "password456");
-        userPasswords.put("manager1", "password789");
-        userPasswords.put("admin1", "adminpass");
-        if (userPasswords.containsKey(username) && userPasswords.get(username).equals(password)) {
-            return true;
-        }
-        return false;
+        this.password = password;
     }
     public String getName() {
         return name;
@@ -42,7 +30,7 @@ public abstract class User {
     public String getId() {
         return id;
     }
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getPassword() {
+        return password;
     }
 }

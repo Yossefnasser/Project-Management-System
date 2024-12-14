@@ -82,9 +82,6 @@ public class EmployeeController {
 
     private Employee employee;
     public void initialize() {
-        employee = new Employee("name" , 15 ,"51","01111",0);
-        employeeRequestsTable.setItems(requests);
-        List<Employee> employees = Employee.loadEmployeeData();
 
     }
 

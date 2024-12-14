@@ -6,8 +6,8 @@ public class TeamLeader extends Employee{
     private List<Employee>team;
 
 
-    public TeamLeader(String name, int age, String id, String phoneNumber,double hoursWorked , List<Employee> team) {
-        super(name, age, id, phoneNumber, hoursWorked);
+    public TeamLeader(String name, int age, String id, String password,double hoursWorked , List<Employee> team) {
+        super(name, age, id, password, hoursWorked);
         this.team = team;
     }
     //put the   task  to employee
