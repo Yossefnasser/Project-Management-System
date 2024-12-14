@@ -9,6 +9,7 @@ import java.util.List;
 
 public class Employee extends User {
     private double hoursWorked;
+    private double monthlyHoursWorked ;
     private List<String> penalties ;
     private List<Task> assignedTasks;
     private static final String EMPLOYEE_FILE = "employees.txt";
@@ -49,7 +50,10 @@ public class Employee extends User {
         }
         return employees;
     }
-    public void requestVacation(){
+    public void monthlyWorked(long duration) {
+
+        monthlyHoursWorked += duration;
+        System.out.println(monthlyHoursWorked);
 
     }
     public List<String> viewPenalties(){
@@ -71,6 +75,10 @@ public class Employee extends User {
 
     public List<Task> getAssignedTasks() {
         return assignedTasks;
+    }
+
+    public long getHoursWorked() {
+        return (long) hoursWorked;
     }
 }
 

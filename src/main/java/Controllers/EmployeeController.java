@@ -114,8 +114,11 @@ public class EmployeeController {
             long hours = duration.toHours();
             long minutes = duration.toMinutes() % 60;
 
-            employee.setHoursWorked(hours);
             calculatedTime.setText("Total Working Hours: " + hours + " hours and " + minutes + " minutes");
+            System.out.println(hours + " hours and " + minutes + " minutes");
+            employee.setHoursWorked(hours);
+            employee.monthlyWorked(employee.getHoursWorked());
+            System.out.println(employee.getHoursWorked());
 
         } catch (DateTimeParseException ex) {
             calculatedTime.setText("Invalid time format! Please use HH:mm.");
@@ -135,7 +138,7 @@ public class EmployeeController {
 
         // Add a new request as a map
         Map<String, String> request = new HashMap<>();
-        request.put("employeeName", "John Doe"); // Replace with actual employee name if needed
+        request.put("employeeName", employee.getName()); // Replace with actual employee name if needed
         request.put("startDate", startDate);
         request.put("endDate", endDate);
         request.put("status", "Pending");

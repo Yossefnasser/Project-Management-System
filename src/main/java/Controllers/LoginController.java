@@ -37,7 +37,7 @@ public class LoginController {
     private void processLogin() {
         String username = usernamefield.getText();
         String password = passwordfield.getText();
-        if (username.equals( '1')&&password.equals( '1') ) {
+        if (username.equals('1')&&password.equals( '1') ) {
             Employee newEmployee = new Employee("Jane Doe", 20, "222", "04010", 0);
             newEmployee.saveEmployeeData();
         }
