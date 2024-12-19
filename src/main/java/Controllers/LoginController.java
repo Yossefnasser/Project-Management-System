@@ -12,6 +12,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import models.Admin;
 import models.Employee;
 import models.TeamLeader;
 import models.User;
@@ -61,8 +62,10 @@ public class LoginController {
                 if (matchedUser.getRole().equals("Employee")) {
                     fxmlFile = "/views/EmployeePage.fxml";
                 } else if (matchedUser.getRole().equals("TL")) {
-                    fxmlFile = "/views/TLPage.fxml";
-                } else {
+                    fxmlFile = "/views/TLPage.fxml";}
+                    else if (matchedUser.getRole().equals("Admin")) {
+                    fxmlFile = "/views/Admin.fxml";}
+                else {
                     errorMessage.setText("Invalid role: " + matchedUser.getRole());
                     return;
                 }
@@ -75,6 +78,9 @@ public class LoginController {
                 } else if (matchedUser instanceof TeamLeader) {
                     TLController controller = loader.getController();
                     controller.setTL((TeamLeader) matchedUser);
+                } else if (matchedUser instanceof Admin) {
+                    AdminController controller = loader.getController();
+                    controller.setAdmin((Admin) matchedUser);
                 }
 
                 Stage stage = (Stage) usernamefield.getScene().getWindow();

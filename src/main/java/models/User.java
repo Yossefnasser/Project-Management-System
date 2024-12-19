@@ -88,7 +88,7 @@ public abstract class User {
 
         switch (role) {
             case "Admin":
-                throw new UnsupportedOperationException("Admin role not implemented yet");
+                return new Admin(name, id, password);
             case "PM":
                 throw new UnsupportedOperationException("Admin role not implemented yet");
             case "TL":
@@ -147,4 +147,9 @@ public abstract class User {
     public String getRole() {
         return role;
     }
-}
+
+    protected void setName(String newName) {this.name = newName ;
+    }
+
+    protected void setPassword(String newPassword) {this.password = newPassword;}
+    }

@@ -1,2 +1,3 @@
 role=Employee;id=1;name=John Doe;password=1;hoursWorked=46.5;
 role=TL;id=2;name=John Doe;password=2;teamId=null;
+role=Admin;id=3;name=John Doe;password=3;teamId=null;
