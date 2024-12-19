@@ -13,6 +13,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import models.Employee;
+import models.TeamLeader;
+import models.User;
 
 import java.io.IOException;
 import java.util.List;
@@ -31,9 +33,6 @@ public class LoginController {
     @FXML
     private Button loginButton;
 
-    /**
-     * Process the login attempt.
-     */
     private void processLogin() {
         String username = usernamefield.getText();
         String password = passwordfield.getText();
@@ -44,27 +43,39 @@ public class LoginController {
             return;
         }
 
-        // Load employees from the file
-        List<Employee> employees = Employee.loadEmployees();
-
         // Search for the employee by ID (username) and password
-        Employee matchedEmployee = null;
-        for (Employee employee : employees) {
-            if (employee.getId().equals(username) && employee.getPassword().equals(password)) {
-                matchedEmployee = employee;
+        List<User> users = User.readAllUsers();
+        User matchedUser = null;
+        for (User user : users) {
+            if (user.getId().equals(username) && user.getPassword().equals(password)) {
+                matchedUser = user;
                 break;
             }
         }
 
-        if (matchedEmployee != null) {
+        if (matchedUser != null) {
             // Successful login
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/EmployeePage.fxml"));
+                String fxmlFile = "";
+
+                if (matchedUser.getRole().equals("Employee")) {
+                    fxmlFile = "/views/EmployeePage.fxml";
+                } else if (matchedUser.getRole().equals("TL")) {
+                    fxmlFile = "/views/TLPage.fxml";
+                } else {
+                    errorMessage.setText("Invalid role: " + matchedUser.getRole());
+                    return;
+                }
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
                 Parent root = loader.load();
 
-                // Pass the logged-in employee to the next controller (if needed)
-                // EmployeePageController controller = loader.getController();
-                // controller.setEmployee(matchedEmployee);
+                if (matchedUser instanceof Employee) {
+                    EmployeeController controller = loader.getController();
+                    controller.setEmployee((Employee) matchedUser);
+                } else if (matchedUser instanceof TeamLeader) {
+                    TLController controller = loader.getController();
+                    controller.setTL((TeamLeader) matchedUser);
+                }
 
                 Stage stage = (Stage) usernamefield.getScene().getWindow();
                 stage.setScene(new Scene(root));
@@ -74,7 +85,6 @@ public class LoginController {
                 errorMessage.setText("Failed to load EmployeePage.");
             }
         } else {
-            // Failed login
             errorMessage.setText("Username or password is incorrect");
         }
     }

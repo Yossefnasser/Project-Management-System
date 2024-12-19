@@ -2,31 +2,38 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TeamLeader extends Employee{
-    private List<Employee>team;
+public class TeamLeader extends User{
+    private String teamId;
 
 
-    public TeamLeader(String name, int age, String id, String password,double hoursWorked , List<Employee> team) {
-        super(name, age, id, password, hoursWorked);
-        this.team = team;
+    public TeamLeader(String name, String id, String password , String teamId) {
+        super(name, id, password,"TL");
+        this.teamId = teamId;
     }
     //put the   task  to employee
-    public void assignTask(Employee employee , Task task) {
+    public void assignTask(Employee employee , Tasks task) {
 
     }
     //viewCompletedTasks()
-    public List<Task> viewCompletedTasks() {
-        List<Task> completedTasks = new ArrayList<>();
-
-
+    public List<Tasks> viewCompletedTasks() {
+        List<Tasks> completedTasks = new ArrayList<>();
 
         return completedTasks;
     }
 
     // manageEmployees() 1-accept or reject vacation/2-add penalties
-    public List<Employee> manageEmployees() {
+    public String manageEmployees() {
         // Simply return the team list
-        return this.team;
+        return this.teamId;
     }
 
+    @Override
+    protected void addCustomData(StringBuilder data) {
+        data.append("teamId=").append(teamId).append(";");
+    }
+
+    @Override
+    public void performRoleSpecificTask() {
+
+    }
 }

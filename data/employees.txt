@@ -1,0 +1,2 @@
+role=Employee;id=1;name=John Doe;password=1;hoursWorked=46.5;
+role=TL;id=2;name=John Doe;password=2;teamId=null;
